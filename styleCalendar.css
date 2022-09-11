@@ -1,118 +1,3 @@
- additions and 0 deletions.
- 43  
-calendar.html
-@@ -0,0 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar</title>
-
-   <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="styleCalendar.css">
-</head>
-<body>
-
-    <div class="container">
-        <div class="calendar">
-            <div class="month">
-                <div class="date">
-                    <h1></h1>
-                    <p class="pclass"></p>
-                </div>
-            </div>
-            <div class="weekdays">
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
-                <div>Sun</div>
-            </div>
-            <div class="days">
-
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <script src="jsCalendar.js"></script>
-</body>
-</html>
- 62  
-jsCalendar.js
-@@ -0,0 +1,62 @@
-const monthEl=document.querySelector('.date h1');
-const fullDateEl=document.querySelector('.date p');
-const daysEl=document.querySelector(".days");
-const months=["january","february","march","april",
-"may","june","july","august","september","october","november","december",
-];
-const monthIndex=new Date().getMonth();
-monthEl.innerHTML=months[monthIndex];
-const fullDate=new Date().toDateString();
-fullDateEl.innerHTML=fullDate;
-const firstDay=new Date(new Date().getFullYear(),new Date().getMonth(),1).getDay()-1;
-const lastDay=new Date(new Date().getFullYear(),monthIndex+1,0).getDate();
-let days="";
-for(let i=firstDay;i>0;i--){
-    days+=`<div class="empty"></div>`;
-}
-for(let i=1;i<=lastDay;i++){
-    if(i===new Date().getDate()){
-        days+=`<div class="today" onmouseover="popup()" onmouseleave="popdown()" >${i}</div>`
-
-    }else if (i==13){
-        days+=`<div class="special" onmouseover="special()" onmouseleave="normal()">${i}</div>`
-    }
-
-    else{
-        days+=`<div>${i}</div>`;
-    }
-
-
-}
-daysEl.innerHTML=days;
-const dEl=document.querySelector('.date p');
-function popup(){
-
-    dEl.style.fontSize="2rem";
-    dEl.style.fontWeight="900";
-    dEl.style.transition=".3s";
-}
-function popdown(){
-    dEl.style.fontSize="1.2rem";
-    dEl.style.fontWeight="400";
-}
-function special(){
-    const p=document.querySelector(".date h1");
-    p.innerHTML="SPECIAL DAY";
-    p.style.transitionDelay="1s";
-    const n=document.querySelector('.date p');
-    n.innerHTML="26-13=13";
-    n.style.transition="1s";
-
-
-
-}
-function normal(){
-    const monthEl=document.querySelector('.date h1');
-const fullDateEl=document.querySelector('.date p');
-    const monthIndex=new Date().getMonth();
-monthEl.innerHTML=months[monthIndex];
-const fullDate=new Date().toDateString();
-fullDateEl.innerHTML=fullDate;
-}
-
- 99  
-styleCalendar.css
-@@ -0,0 +1,99 @@
 *{
     margin: 0;
 padding: 0;
@@ -121,7 +6,7 @@ font-family: sans-serif;
 }
 .container{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: tomato;
     display: flex;
     justify-content: center;
@@ -130,8 +15,8 @@ font-family: sans-serif;
 .calendar{
     background-color: rgba(255, 174, 24, 0.856);
     color: rgb(0, 0, 0);
-    width: 420px;
-    height: 550px;
+    width: 450px;
+    height: 520px;
     border-radius: 10px;
     box-shadow: 5px 5px 10px 15px rgba(0, 0, 0, .5);
     overflow: hidden;
@@ -139,7 +24,7 @@ font-family: sans-serif;
 .month{
     width: 100%;
     background-color: blueviolet;
-    height:100px;
+    height:120px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -162,7 +47,7 @@ font-family: sans-serif;
     display: flex;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, .6);
    background-color: skyblue;
-
+   
 }
 .weekdays div{
  font-size: 18px;
@@ -172,8 +57,8 @@ font-family: sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-
-
+    
+    
 }
 .days {
     width: 100%;
@@ -190,7 +75,7 @@ font-family: sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
 }
 .days div:hover:not(.empty){
     border:2px solid gray;
@@ -200,8 +85,15 @@ font-family: sans-serif;
     background-color: blueviolet;
 }
 .special:hover{
-
+    
      background-color: rgb(48, 180, 180);
      color: black;
      font-size: 30px;
+     
+     
 }
+
+
+
+
+
